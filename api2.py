@@ -68,6 +68,8 @@ def stream(query, history, max_length, top_p, temperature):
                                                top_p=top_p if top_p else 0.7,
                                                temperature=temperature if temperature else 0.95):
         this_response = response[size:]
+        if str(this_response).encode('utf-8').endswith(b'\xef\xbf\xbd'):
+            continue
         history = [list(h) for h in history]
         size = len(response)
         yield {"delta": this_response, "response": response, "finished": False}
