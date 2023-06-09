@@ -72,8 +72,9 @@ def stream(query, history, max_length, top_p, temperature):
             continue
         history = [list(h) for h in history]
         size = len(response)
-        yield {"delta": this_response, "response": response, "finished": False}
-    yield {"query": query, "delta": "[EOS]", "response": response, "history": history, "finished": True}
+        yield {"delta": this_response, "finished": False}
+    yield {"query": query, "delta": "[EOS]", "history": history, "finished": True}
+
 
 
 MAX_HISTORY = 5
